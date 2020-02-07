@@ -1,3 +1,4 @@
+
 #include <Rmath.h>
 #include <math.h>
 #define ARMA_DONT_PRINT_ERRORS
@@ -22,6 +23,11 @@
 using namespace Rcpp;
 
 
+
+double log1(int Y){
+  double Y1=Y;
+  return(log(Y1));
+}
 
 
 
@@ -910,9 +916,9 @@ List BayesPiecewiseLinearLogHazardTrt( arma::vec Y, //Survival Times
       alpha =    LikePLLHTrt(Y,I1, Trt,  sprop, lamprop , L-1,Beta) -    LikePLLHTrt(Y,I1, Trt, s, lam , L,Beta);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -983,9 +989,9 @@ List BayesPiecewiseLinearLogHazardTrt( arma::vec Y, //Survival Times
       alpha =    LikePLLHTrt(Y,I1, Trt, sprop, lam , L+1, Beta) -    LikePLLHTrt(Y,I1, Trt, s, lam , L, Beta);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //Add proposal ratio for \lambda
       if(L==0){
         alpha = alpha  - .5*pow(lamprop[1]-lamprop[0],2)/sig - .5*pow(lamprop[2]-lamprop[1],2)/sig + .5*pow(lam[1]-lam[0],2)/sig ;
@@ -1546,9 +1552,9 @@ List  BayesPiecewiseHazardTrt( arma::vec Y, //Survival Times
       alpha =    LikePEHTrt(Y,I1,Trt,sprop, lamprop , L+1,Beta) -    LikePEHTrt(Y,I1,Trt, s, lam , L,Beta);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
       alpha = alpha - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //log of Jacobian for detailed balance
       alpha=alpha-log(U1*(1-U1)) ;
@@ -1648,9 +1654,9 @@ List  BayesPiecewiseHazardTrt( arma::vec Y, //Survival Times
       alpha =    LikePEHTrt(Y,I1,Trt, sprop, lamprop , L-1,Beta) -    LikePEHTrt(Y,I1,Trt, s, lam , L,Beta);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -2202,9 +2208,9 @@ List  BayesPiecewiseHazardCOV( arma::vec Y, //Survival Times
       alpha =    LikePEHCOV(Y,I1,COV,sprop, lamprop , L+1,Beta) -    LikePEHCOV(Y,I1,COV, s, lam , L,Beta);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
       alpha = alpha - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //log of Jacobian for detailed balance
       alpha=alpha-log(U1*(1-U1)) ;
@@ -2304,9 +2310,9 @@ List  BayesPiecewiseHazardCOV( arma::vec Y, //Survival Times
       alpha =    LikePEHCOV(Y,I1,COV, sprop, lamprop , L-1,Beta) -    LikePEHCOV(Y,I1,COV, s, lam , L,Beta);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -2840,9 +2846,9 @@ List  BayesPiecewiseLinearLogHazardCOV( arma::vec Y, //Survival Times
       alpha =    LikePLLHCOV(Y,I1, COV,  sprop, lamprop , L-1,Beta) -    LikePLLHCOV(Y,I1, COV, s, lam , L,Beta);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -2913,9 +2919,9 @@ List  BayesPiecewiseLinearLogHazardCOV( arma::vec Y, //Survival Times
       alpha =    LikePLLHCOV(Y,I1, COV, sprop, lam , L+1, Beta) -    LikePLLHCOV(Y,I1, COV, s, lam , L, Beta);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //Add proposal ratio for \lambda
       if(L==0){
         alpha = alpha  - .5*pow(lamprop[1]-lamprop[0],2)/sig - .5*pow(lamprop[2]-lamprop[1],2)/sig + .5*pow(lam[1]-lam[0],2)/sig ;
@@ -3344,9 +3350,9 @@ List  BayesPiecewiseHazard( arma::vec Y, //Survival Times
       alpha =    LikePEH(Y,I1,sprop, lamprop , L+1) -    LikePEH(Y,I1, s, lam , L);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
       alpha = alpha - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //log of Jacobian for detailed balance
       alpha=alpha-log(U1*(1-U1)) ;
@@ -3446,9 +3452,9 @@ List  BayesPiecewiseHazard( arma::vec Y, //Survival Times
       alpha =    LikePEH(Y,I1, sprop, lamprop , L-1) -    LikePEH(Y,I1, s, lam , L);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -4032,9 +4038,9 @@ List BayesPiecewiseLinearLogHazard( arma::vec Y, //Survival Times
       alpha =    LikePLLH(Y,I1,  sprop, lamprop , L-1) -    LikePLLH(Y,I1, s, lam , L);
       //Prior Ratio
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log1(L);
       //S Prior
-      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha +2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log1(2*L+1) - log1(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
       if(L==1){
         //Removing will drop the sampler to 0 split points
@@ -4105,9 +4111,9 @@ List BayesPiecewiseLinearLogHazard( arma::vec Y, //Survival Times
       alpha =    LikePLLH(Y,I1, sprop, lam , L+1) -    LikePLLH(Y,I1, s, lam , L);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1) ;
+      alpha= alpha + log(Poi) - log1(L+1) ;
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
+      alpha = alpha + log1(2*L+3)+log1(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth) - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //Add proposal ratio for \lambda
       if(L==0){
         alpha = alpha  - .5*pow(lamprop[1]-lamprop[0],2)/sig - .5*pow(lamprop[2]-lamprop[1],2)/sig + .5*pow(lam[1]-lam[0],2)/sig ;
@@ -4186,7 +4192,3 @@ List BayesPiecewiseLinearLogHazard( arma::vec Y, //Survival Times
   
   
 }
-
-
-
-
