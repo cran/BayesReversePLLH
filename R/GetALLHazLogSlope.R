@@ -7,6 +7,8 @@ GetALLHazLogSlope = function(x,G1){
   GetHazPLLH = function(x,s,lam,J){
     y=x
     
+    
+    
     slopes = diff(lam)/diff(s)
     slopes=slopes[1:(J+1)]
     
@@ -24,24 +26,24 @@ GetALLHazLogSlope = function(x,G1){
     return(y)  
   }
   
-
-HAZ = matrix(ncol=length(x),nrow=nrow(G1))
-
-y1=rep(0,length(x))  
-y=x
-
-for(b in 1:nrow(G1[[1]])){
   
-  s=G1[[1]][b,]
-  lam=G1[[2]][b,]
-  J = G1[[3]][b]
+  HAZ = matrix(ncol=length(x),nrow=nrow(G1[[1]]))
   
-  HAZ[b,]=GetHazPLLH(x,s,lam,J)
+  y1=rep(0,length(x))  
+  y=x
   
-}
-
-return(HAZ)
-
+  for(b in 1:nrow(G1[[1]])){
+    
+    s=G1[[1]][b,]
+    lam=G1[[2]][b,]
+    J = G1[[3]][b]
+    
+    HAZ[b,]=GetHazPLLH(x,s,lam,J)
+    
+  }
+  
+  return(HAZ)
+  
 }
 
 

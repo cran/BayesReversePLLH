@@ -3938,6 +3938,10 @@ List BayesPiecewiseLinearLogHazard( arma::vec Y, //Survival Times
     alpha = alpha - .5*pow(lamprop[L+1]-lamprop[L],2)/sig + .5*pow(lam[L+1]-lam[L],2)/sig   ;
     
     U=log(as_scalar(arma::randu(1)));
+    
+    z9[0]=alpha;
+    Rf_PrintValue(wrap(z9));
+    
     if(U<alpha){
       lam(L+1)=lamprop(L+1);
       ALam2=ALam2+1;

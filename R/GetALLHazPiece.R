@@ -26,7 +26,7 @@ GetALLHazPiece = function(x,G1){
   }
   
   
-  HAZ = matrix(ncol=length(x),nrow=nrow(G1))
+  HAZ = matrix(ncol=length(x),nrow=nrow(G1[[1]]))
   
   y1=rep(0,length(x))
   y=x
