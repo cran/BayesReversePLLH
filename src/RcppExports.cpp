@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // ApproxMean
 double ApproxMean(arma::vec Y, arma::vec s, arma::vec lam, int J);
 RcppExport SEXP _BayesReversePLLH_ApproxMean(SEXP YSEXP, SEXP sSEXP, SEXP lamSEXP, SEXP JSEXP) {

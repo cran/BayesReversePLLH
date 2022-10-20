@@ -1,4 +1,4 @@
-7f15e733e071dbea50981977d5e5c251 *DESCRIPTION
+b79f44d9aaa818f7ebfc47f7b58622d4 *DESCRIPTION
 571d9cd22923bb734e75da6c1a5d7f1a *NAMESPACE
 bb26115d4e3517b4c550a4cd9109c690 *R/GetALLHazLogSlope.R
 3e969bcc7a00900ecb9f2dd7159b9ee7 *R/GetALLHazPiece.R
@@ -24,7 +24,7 @@ e77979df72d94985fa3773a6d86db010 *R/RcppExports.R
 13871eef4e65a69113ad818650759ab2 *man/PostMeanHazPiece.Rd
 1eb0bfbffabb3af2cf85a07097d3bab0 *man/PostMeanSurvPEH.Rd
 1b5158e6c37eb321c121ecc6b1babb61 *man/PostMeanSurvPLLH.Rd
-000a1977e8bf4b1d27c10936861ee5b5 *src/BayesReversePLLH.cpp
+acc4e72b3518e4860a19fddc9ed09480 *src/BayesReversePLLH.cpp
 61059660eb073d93e00e8ee054237071 *src/Makevars
 61059660eb073d93e00e8ee054237071 *src/Makevars.win
-f628277b2c38abfea37b1ada2f204360 *src/RcppExports.cpp
+bae703cd4f26fea7315acfd81a5a2ba7 *src/RcppExports.cpp

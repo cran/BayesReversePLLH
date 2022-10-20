@@ -436,7 +436,7 @@ int SampleBirth(arma::vec s,int L){
   }else{
     
     for(m=1;m<cumprob.n_rows;m++){
-      if((U>cumprob[m-1]) & (U<cumprob[m])){
+      if((U>cumprob[m-1]) && (U<cumprob[m])){
         Which1=m;
       }
     }
@@ -686,7 +686,7 @@ List BayesPiecewiseLinearLogHazardTrt( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     //Every 250 observations, let's adjust variance until burnin
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
@@ -1126,7 +1126,7 @@ double LikePEHTrt( arma::vec Y, //Survival Times
       LogL = LogL - max1(0,min1(s(l+1),Y(m))-s(l))*exp(lam[l]+Beta*Trt[m]);
       
       
-      if((Y(m)>s[l]) & (Y(m)<=s[l+1]) & (I1[m]==1)){
+      if((Y(m)>s[l]) && (Y(m)<=s[l+1]) && (I1[m]==1)){
         LogL = LogL + lam[l] + Beta*Trt[m];
       }
       
@@ -1169,7 +1169,7 @@ double LikePEHCOV( arma::vec Y, //Survival Times
       LogL = LogL - max1(0,min1(s(l+1),Y(m))-s(l))*exp(lam[l]+eta[m]);
       
       
-      if((Y(m)>s[l]) & (Y(m)<=s[l+1]) & (I1[m]==1)){
+      if((Y(m)>s[l]) && (Y(m)<=s[l+1]) && (I1[m]==1)){
         LogL = LogL + lam[l] + eta[m];
       }
       
@@ -1350,7 +1350,7 @@ List  BayesPiecewiseHazardTrt( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
@@ -1489,7 +1489,7 @@ List  BayesPiecewiseHazardTrt( arma::vec Y, //Survival Times
         //Draw new proposal for s_j, but make sure it's between s_j and s_j+1
         sprop[j]=as_scalar(arma::randu(1))*(sprop[j+1]-sprop[j-1]) + sprop[j-1];
         //Acceptance ratio
-        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])+
+        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])-
           log(s[j]-s[j-1]) +   LikePEHTrt(Y,I1,Trt, sprop, lam , L,Beta) -    LikePEHTrt(Y,I1,Trt, s, lam , L,Beta);
         
         //Metropolis Hastings
@@ -2008,7 +2008,7 @@ List  BayesPiecewiseHazardCOV( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
@@ -2145,7 +2145,7 @@ List  BayesPiecewiseHazardCOV( arma::vec Y, //Survival Times
         //Draw new proposal for s_j, but make sure it's between s_j and s_j+1
         sprop[j]=as_scalar(arma::randu(1))*(sprop[j+1]-sprop[j-1]) + sprop[j-1];
         //Acceptance ratio
-        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])+
+        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])-
           log(s[j]-s[j-1]) +   LikePEHCOV(Y,I1,COV, sprop, lam , L,Beta) -    LikePEHCOV(Y,I1,COV, s, lam , L,Beta);
         
         //Metropolis Hastings
@@ -2626,7 +2626,7 @@ List  BayesPiecewiseLinearLogHazardCOV( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
@@ -2797,7 +2797,7 @@ List  BayesPiecewiseLinearLogHazardCOV( arma::vec Y, //Survival Times
         //Draw new proposal for s_j, but make sure it's between s_j and s_j+1
         sprop[j]=as_scalar(arma::randu(1))*(sprop[j+1]-sprop[j-1]) + sprop[j-1];
         //Acceptance ratio
-        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])+
+        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])-
           log(s[j]-s[j-1]) +   LikePLLHCOV(Y,I1,COV, sprop, lam , L,Beta) -    LikePLLHCOV(Y,I1,COV, s, lam , L,Beta);
         
         //Metropolis Hastings
@@ -3026,7 +3026,7 @@ double LikePEH( arma::vec Y, //Survival Times
       LogL = LogL - max1(0,min1(s(l+1),Y(m))-s(l))*exp(lam[l]);
       
       
-      if((Y(m)>s[l]) & (Y(m)<=s[l+1]) & (I1[m]==1)){
+      if((Y(m)>s[l]) && (Y(m)<=s[l+1]) && (I1[m]==1)){
         LogL = LogL + lam[l];
       }
       
@@ -3180,7 +3180,7 @@ List  BayesPiecewiseHazard( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
@@ -3288,7 +3288,7 @@ List  BayesPiecewiseHazard( arma::vec Y, //Survival Times
         //Draw new proposal for s_j, but make sure it's between s_j and s_j+1
         sprop[j]=as_scalar(arma::randu(1))*(sprop[j+1]-sprop[j-1]) + sprop[j-1];
         //Acceptance ratio
-        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])+log(s[j]-s[j-1]) +   LikePEH(Y,I1, sprop, lam , L) -    LikePEH(Y,I1, s, lam , L);
+        alpha = log(sprop[j+1]-sprop[j])+log(sprop[j]-sprop[j-1])-log(s[j+1]-s[j])-log(s[j]-s[j-1]) +   LikePEH(Y,I1, sprop, lam , L) -    LikePEH(Y,I1, s, lam , L);
         
         //Metropolis Hastings
         U = log(as_scalar(arma::randu(1)));
@@ -3831,7 +3831,7 @@ List BayesPiecewiseLinearLogHazard( arma::vec Y, //Survival Times
   for(m=0;m<B;m++){
     
     //Every 250 observations, let's adjust variance until burnin
-    if( (m%250==0) & (m<(B-B1))){
+    if( (m%250==0) && (m<(B-B1))){
       //Tune proposal variance for lambda here
       if((ALam/NLam)>High){
         //Double the variance, acceptance is too high
